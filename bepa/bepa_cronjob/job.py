@@ -83,7 +83,7 @@ def run():
                  from_user=mailgun_username,
                  to_email=sub.email,
                  subject=f'{coin} price change alert!',
-                 text="The price of {coin} is changed {diff_percent}% from {last_price} to {coin_data['price']}" 
+                 text=f"The price of {coin} is changed {diff_percent}% from {last_price} to {coin_data['price']}" 
             )
             print(response)
             print(response.text)
