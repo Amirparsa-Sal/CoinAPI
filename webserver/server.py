@@ -23,7 +23,7 @@ db.init_app(app)
 class Price(db.Model):
     id = db.Column(db.BigInteger, primary_key=True)
     coin_name = db.Column(db.String(128))
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now().isoformat())
+    timestamp = db.Column(db.DateTime(timezone=True), nullable=False)
     price = db.Column(db.Float)
 
     def serialize(self):
