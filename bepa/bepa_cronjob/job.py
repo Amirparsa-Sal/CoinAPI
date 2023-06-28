@@ -56,7 +56,7 @@ def run():
 
         # if there is no previous data save and continue
         if last_data is None:
-            price = Price(coin_name=coin, price=-coin_data['value'], timestamp=timestamp)
+            price = Price(coin_name=coin, price=coin_data['value'], timestamp=timestamp)
             session.add(price)
             continue
         
@@ -66,7 +66,8 @@ def run():
         
         # calculate the price difference percentage
         last_price = last_data.price
-        diff_percent = abs((-coin_data['value'] - last_price) / last_price * 100) if last_price !=0 else 0
+        diff_percent = abs((coin_data['value'] - last_price) / last_price * 100) if last_price !=0 else 0
+        print(coin_data['value'], last_price)
         print(coin, diff_percent)
 
         # find subscription which are triggered
@@ -83,12 +84,12 @@ def run():
                  from_user=mailgun_username,
                  to_email=sub.email,
                  subject=f'{coin} price change alert!',
-                 text=f"The price of {coin} is changed {diff_percent}% from {last_price} to {coin_data['price']}" 
+                 text=f"The price of {coin} is changed {diff_percent}% from {last_price} to {coin_data['value']}" 
             )
             print(response)
             print(response.text)
         # Create new price record
-        price = Price(coin_name=coin, price=-coin_data['value'], timestamp=timestamp)
+        price = Price(coin_name=coin, price=coin_data['value'], timestamp=timestamp)
         session.add(price)
     
     session.commit()
