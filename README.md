@@ -35,7 +35,7 @@ A simple service to subscribe and check coins price update.
 - Run the webserver:
   
   ```bash
-  docker run -it --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000 coin_api_webserver5
+  docker run -d --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000 coin_api_webserver
   ```
   
   Create `.env` file inside `bepa` folder containing the following content:
