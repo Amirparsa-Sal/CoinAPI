@@ -1,0 +1,14 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  name: coinnews
+
+data:
+  COIN_NEWS_HOST=fill_this
+  
+  POSTGRES_HOST=fill_this
+  POSTGRES_PORT=fill_this
+  
+  MAILGUN_USER_NAME=fill_this

@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: coinnews-webserver
+
+  labels:
+    app: webserver
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: webserver
+
+  template:
+    metadata:
+      labels:
+        app: webserver
+
+    spec:
+      containers:
+      - name: coinnews-webserver
+        image: amirparsa/coin_api_webserver:latest
+        ports:
+        - containerPort: 5000
+        
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: coinnews-secret
+                key: POSTGRES_USER
+                
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: coinnews-secret
+                key: POSTGRES_PASSWORD
+          
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: coinnews-secret
+                key: POSTGRES_DB
+
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: coinnews-configmap
+                key: POSTGRES_HOST
+
+          - name: POSTGRES_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: coinnews-configmap
+                key: POSTGRES_PORT
+          
+          - name: WEBSERVER_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: coinnews-configmap
+                key: WEBSERVER_PORT
+
+          - name: COIN_NEWS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: coinnews-configmap
+                key: COIN_NEWS_HOST
+
+            
