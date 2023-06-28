@@ -2,16 +2,46 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    background-image: url("assets/background.webp");
+    background-size: cover;
   }
-  
+
+  #mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: rgba(13, 5, 51, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30 px rgba(255, 255, 255, 0.4);  
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+  }
+
+  .vflex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+  }
+
   #toggleContainer {
+    padding: 5px;
+    margin: 5px;
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
   }
   
   #toggleContainer button {
-    margin-right: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
     background-color: #4CAF50;
     color: white;
   }
@@ -23,31 +53,39 @@ body {
   
   h2 {
     margin-top: 0;
+    color: #f2f2f2;
   }
   
   form {
+    padding: 5px;
+    margin: 5px;
     margin-bottom: 20px;
+    
   }
   
   label {
     display: block;
     margin-bottom: 5px;
+    color: #f2f2f2;
   }
   
   input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
+    box-sizing:border-box;
+    border-radius: 16px;
   }
   
   button {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #303430;
+    background-color: #9e940b;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 16px;
   }
   
   table {
@@ -61,6 +99,10 @@ body {
     border-bottom: 1px solid #ddd;
   }
   
+  td {
+    color: #f2f2f2;
+  }
+
   th {
     background-color: #f2f2f2;
   }
