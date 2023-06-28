@@ -5,12 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 import requests
 from coinnews_webserver.validators import subscribe_schema
 from jsonschema import validate, ValidationError
+from flask_cors import CORS 
 
 def create_app():
     load_dotenv()
 
     db = SQLAlchemy()
     app = Flask(__name__)
+
+    CORS(app)
 
     # Config Database
     POSTGRES_USER = os.getenv('POSTGRES_USER')

@@ -12,6 +12,7 @@ setup(
         'psycopg2==2.9.6',
         'requests==2.31.0',
         'jsonschema==4.17.3',
+        'flask-cors==4.0.0',
         # Add more dependencies as needed
     ],
     entry_points={
