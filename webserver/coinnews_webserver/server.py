@@ -2,9 +2,7 @@ from flask import Flask, request, jsonify
 import os
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
 import requests
-import re
 from coinnews_webserver.validators import subscribe_schema
 from jsonschema import validate, ValidationError
 
@@ -15,8 +13,16 @@ def create_app():
     app = Flask(__name__)
 
     # Config Database
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DB_CONNECTION_STRING')
+    POSTGRES_USER = os.getenv('POSTGRES_USER')
+    POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+    POSTGRES_HOST = os.getenv('POSTGRES_HOST')
+    POSTGRES_PORT = os.getenv('POSTGRES_PORT')
+    POSTGRES_DB = os.getenv('POSTGRES_DB')
 
+    app.config["SQLALCHEMY_DATABASE_URI"] = \
+    f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+
+    # Get available coins
     available_coins = requests.get(os.getenv('COIN_NEWS_HOST') + '/api/data').json()
 
     db.init_app(app)
@@ -110,7 +116,7 @@ def create_app():
 
 def run():
     app = create_app()
-    port = int(os.getenv('SERVER_PORT'))
+    port = int(os.getenv('WEBSERVER_PORT'))
     app.run(host='0.0.0.0', port=port)
 
 

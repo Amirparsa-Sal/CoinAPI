@@ -27,7 +27,15 @@ def run():
     load_dotenv()
 
     # Create an engine to connect to the database
-    engine = create_engine(os.getenv('DB_CONNECTION_STRING'))
+    POSTGRES_USER = os.getenv('POSTGRES_USER')
+    POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+    POSTGRES_HOST = os.getenv('POSTGRES_HOST')
+    POSTGRES_PORT = os.getenv('POSTGRES_PORT')
+    POSTGRES_DB = os.getenv('POSTGRES_DB')
+
+    engine = create_engine(
+        f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'     
+    )
 
     # Reflect the existing tables into SQLAlchemy models
     Base = automap_base()
