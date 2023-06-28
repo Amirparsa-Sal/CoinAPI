@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitcoin Subscription</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="toggleContainer">
+    <button id="subscribeToggle">Subscribe Form</button>
+    <button id="historyToggle">History Form</button>
+  </div>
+
+  <div id="subscriptionFormContainer">
+    <h2>Subscribe to Coin</h2>
+
+    <form id="subscriptionForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="coinName">Coin Name:</label>
+      <input type="text" id="coinName" required>
+
+      <label for="differencePercent">Difference Percent:</label>
+      <input type="number" id="differencePercent" min="0" max="100" required>
+
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+  <div id="historyFormContainer" style="display: none;">
+    <h2>Retrieve History</h2>
+
+    <form id="historyForm">
+      <label for="coinNameHistory">Coin Name:</label>
+      <input type="text" id="coinNameHistory" required>
+
+      <button type="button" id="historyButton">Get History</button>
+    </form>
+
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Coin Name</th>
+          <th>Timestamp</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
