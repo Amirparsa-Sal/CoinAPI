@@ -2,11 +2,9 @@
 
 A simple service to subscribe and check coins price update.
 
-
-
 ### How to deploy using Docker
 
-- Deploy coin news API using this [repository]([GitHub - amirhnajafiz/coinnews: Providing a data source for Cloud Computing course (Spring 2023).](https://github.com/amirhnajafiz/coinnews)).
+- Deploy coin news API using this [repository](https://github.com/amirhnajafiz/coinnews).
 
 - Deploy a postgresql container. Here I use `postgres:15-alpine` image:
   
@@ -35,7 +33,7 @@ A simple service to subscribe and check coins price update.
 - Run the webserver:
   
   ```bash
-  docker run -d --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000 coin_api_webserver
+  docker run -d --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000   --name coinnews_webserver coin_api_webserver
   ```
   
   Create `.env` file inside `bepa` folder containing the following content:
@@ -59,5 +57,5 @@ A simple service to subscribe and check coins price update.
 - You can use the following command to run the cronjob one time.
   
   ```bash
-  docker run -it --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000 bepa_conjob
+  docker run -it --env-file .env --link postgresql:db --link coinnews-container:coinnews-host -p 5001:5000 --name coinnews_bepa_cronjob bepa_conjob
   ```
