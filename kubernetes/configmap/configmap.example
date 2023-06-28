@@ -3,12 +3,14 @@ apiVersion: v1
 kind: ConfigMap
 
 metadata:
-  name: coinnews
+  name: coinnews-configmap
 
 data:
-  COIN_NEWS_HOST=fill_this
+  COIN_NEWS_HOST: fill_this
+
+  WEBSERVER_PORT: fill_this
+
+  POSTGRES_HOST: fill_this
+  POSTGRES_PORT: fill_this
   
-  POSTGRES_HOST=fill_this
-  POSTGRES_PORT=fill_this
-  
-  MAILGUN_USER_NAME=fill_this
+  MAILGUN_USER_NAME: fill_this
