@@ -31,6 +31,24 @@ body {
     padding: 10px;
   }
 
+  .hflex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+  }
+
+  a {
+    padding: 5px;
+    text-decoration: none;
+    color: #f2f2f2;
+  }
+
+  a:hover {
+    color: yellow;
+  }
+
   #toggleContainer {
     padding: 5px;
     margin: 5px;
