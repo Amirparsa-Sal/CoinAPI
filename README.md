@@ -69,6 +69,10 @@ A simple service to subscribe and check coins price update.
 
 ### How to deploy using Minikube
 
+- Create `cofigmap.yml` file in `kubernetes/configmap`  folder based on `kubernetes/configmap/configmap.example` file.
+
+- Create `secret.yml` file in `kubernetes/secret` folder based on `kubernetes/secret/secret.example` file.
+
 - Apply config maps:
   
   ```bash
