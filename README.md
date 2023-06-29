@@ -22,7 +22,7 @@ A simple service to subscribe and check coins price update.
   POSTGRES_DB=your_db
   POSTGRES_PORT=5432
   POSTGRES_HOST=db
-
+  
   COIN_NEWS_HOST=http://coinnews-host:8000
   WEBSERVER_PORT=5000
   ```
@@ -47,9 +47,9 @@ A simple service to subscribe and check coins price update.
   POSTGRES_DB=your_db
   POSTGRES_PORT=5432
   POSTGRES_HOST=db
-
+  
   COIN_NEWS_HOST=http://coinnews-host:8000
-
+  
   MAILGUN_DOMAIN=sandbox453580d8b4394b02b7e97264b75b12e5.mailgun.org
   MAILGUN_API_KEY=c92726051d08afcf0e351bf07ad5dc3c-81bd92f8-80e92a12
   MAILGUN_USER_NAME=coin_news_api
@@ -66,3 +66,76 @@ A simple service to subscribe and check coins price update.
   ```bash
   docker run -it --env-file .env --link postgresql:db --link coinnews-container:coinnews-host --name coinnews_bepa_cronjob bepa_conjob
   ```
+
+### How to deploy using Minikube
+
+- Apply config maps:
+  
+  ```bash
+  kubectl apply -f kubernetes/configmap/configmap.yml
+  kubectl apply -f kubernetes/configmap/coinnewsapi-configmap.yml
+  ```
+
+- Apply secret:
+  
+  ```bash
+  kubectl apply -f kubernetes/secret/secret.yml
+  ```
+
+- Apply persistent volume:
+  
+  ```bash
+  kubectl apply -f kubernetes/pvolume/postgres/pvolume.yml
+  ```
+
+- Apply persistent volume claim:
+  
+  ```bash
+  kubectl apply -f kubernetes/pvclaim/postgres/pvclaim.yml
+  ```
+
+- Apply deployments:
+  
+  ```bash
+  kubectl apply -f kubernetes/deployment/coinnewsapi/deployment.yml
+  kubectl apply -f kubernetes/deployment/postgres/deployment.yml
+  kubectl apply -f kubernetes/deployment/webserver/deployment.yml
+  ```
+
+- Apply services:
+  
+  ```bash
+  kubectl apply -f kubernetes/service/coinnewsapi/service.yml
+  kubectl apply -f kubernetes/service/postgres/service.yml
+  kubectl apply -f kubernetes/service/webserver/service.yml
+  ```
+
+- Apply cronjob:
+  
+  ```bash
+  kubectl apply -f kubernetes/cronjob/bepa/cronjob.yml
+  ```
+
+- Apply ingress:
+  
+  ```bash
+  kubectl apply -f kubernetes/ingress/coinnewsapi/ingress.yml
+  ```
+
+Finally check the health of pods using this command:
+
+```bash
+kubectl get pods
+```
+
+To see the API root url you can run the following command:
+
+```bash
+minikube service coinnews-webserver-service
+```
+
+It will open your browser with root path of the api. You should now go to `frontend/script.js` file and set the `api_base` variable to the root path.
+
+
+
+Here you go! You can open `index.html` to work with the service.
